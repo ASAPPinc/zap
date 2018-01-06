@@ -26,6 +26,7 @@ import (
 	"go.uber.org/zap/zapcore"
 
 	"go.uber.org/multierr"
+	"strings"
 )
 
 const (
@@ -162,7 +163,9 @@ func (s *SugaredLogger) Errorf(template string, args ...interface{}) {
 
 // Printf fmt.Sprint to construct and log a templated message matching the many other logger interfaces.
 // LogLevel is InfoLevel
+// NOTE: new line prefixes will be trimmed as this logger will add them automatically.
 func (s *SugaredLogger) Printf(template string, args ...interface{}) {
+	template = strings.TrimSuffix(template, "\n")
 	s.log(InfoLevel, template, args, nil)
 }
 

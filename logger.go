@@ -216,7 +216,9 @@ func (log *Logger) Print(msg string, fields ...zapcore.Field) {
 // Printf logs a message at InfoLevel. The message includes any fields passed
 // at the log site, as well as any fields accumulated on the logger.
 // This is to match many other logger interfaces.
+// NOTE: new line prefixes will be trimmed as this logger will add them automatically.
 func (log *Logger) Printf(msg string, fields ...zapcore.Field) {
+	msg = strings.TrimSuffix(msg, "\n")
 	if ce := log.check(InfoLevel, msg); ce != nil {
 		ce.Write(fields...)
 	}
