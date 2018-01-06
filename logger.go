@@ -204,6 +204,24 @@ func (log *Logger) Error(msg string, fields ...zapcore.Field) {
 	}
 }
 
+// Print logs a message at InfoLevel. The message includes any fields passed
+// at the log site, as well as any fields accumulated on the logger.
+// This is to match many other logger interfaces.
+func (log *Logger) Print(msg string, fields ...zapcore.Field) {
+	if ce := log.check(InfoLevel, msg); ce != nil {
+		ce.Write(fields...)
+	}
+}
+
+// Printf logs a message at InfoLevel. The message includes any fields passed
+// at the log site, as well as any fields accumulated on the logger.
+// This is to match many other logger interfaces.
+func (log *Logger) Printf(msg string, fields ...zapcore.Field) {
+	if ce := log.check(InfoLevel, msg); ce != nil {
+		ce.Write(fields...)
+	}
+}
+
 // DPanic logs a message at DPanicLevel. The message includes any fields
 // passed at the log site, as well as any fields accumulated on the logger.
 //

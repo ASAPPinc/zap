@@ -112,6 +112,18 @@ func (s *SugaredLogger) Error(args ...interface{}) {
 	s.log(ErrorLevel, "", args, nil)
 }
 
+// Print uses fmt.Sprint to construct and log a message matching the many other logger interfaces.
+// LogLevel is InfoLevel
+func (s *SugaredLogger) Print(args ...interface{}) {
+	s.log(InfoLevel, "", args, nil)
+}
+
+// Println uses fmt.Sprint to construct and log a templated message matching the many other logger interfaces.
+// LogLevel is InfoLevel
+func (s *SugaredLogger) Println(args ...interface{}) {
+	s.log(InfoLevel, "", args, nil)
+}
+
 // DPanic uses fmt.Sprint to construct and log a message. In development, the
 // logger then panics. (See DPanicLevel for details.)
 func (s *SugaredLogger) DPanic(args ...interface{}) {
@@ -146,6 +158,12 @@ func (s *SugaredLogger) Warnf(template string, args ...interface{}) {
 // Errorf uses fmt.Sprintf to log a templated message.
 func (s *SugaredLogger) Errorf(template string, args ...interface{}) {
 	s.log(ErrorLevel, template, args, nil)
+}
+
+// Printf fmt.Sprint to construct and log a templated message matching the many other logger interfaces.
+// LogLevel is InfoLevel
+func (s *SugaredLogger) Printf(template string, args ...interface{}) {
+	s.log(InfoLevel, template, args, nil)
 }
 
 // DPanicf uses fmt.Sprintf to log a templated message. In development, the

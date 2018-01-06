@@ -176,6 +176,8 @@ func TestLoggerLeveledMethods(t *testing.T) {
 		}{
 			{logger.Debug, DebugLevel},
 			{logger.Info, InfoLevel},
+			{logger.Print, InfoLevel},
+			{logger.Printf, InfoLevel},
 			{logger.Warn, WarnLevel},
 			{logger.Error, ErrorLevel},
 			{logger.DPanic, DPanicLevel},
